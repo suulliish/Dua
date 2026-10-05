@@ -6,7 +6,7 @@ const CACHE = 'dua-v2';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest',
   './css/app.css',
-  './js/data.js', './js/times.js', './js/progress.js', './js/app.js',
+  './js/data.js', './js/data-extra.js', './js/times.js', './js/progress.js', './js/app.js',
   './data/times-oskemen.json',
   './fonts/onest-cyrillic-ext.woff2', './fonts/onest-cyrillic.woff2',
   './fonts/onest-latin-ext.woff2', './fonts/onest-latin.woff2', './fonts/amiri-arabic.woff2',
