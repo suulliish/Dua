@@ -353,12 +353,15 @@ const hashrEvening = {
     note: 'Таңда да, кешке де оқылады (Хизмет тәсбихаты). «70 000 періште» туралы хабар (Тирмизи 2922) әлсіз (даиф) деп бағаланған'
 };
 
+// the dua of Mu'adh (Abu Dawud 1522): the Prophet told him never to leave it after any prayer
+const muadhCard = maghribDuas.find(d => d.title === 'Зікір, шүкір, ибадат');
+
 const extraByTab = {
-    fajr: [extraCards.fajr_mulk, extraCards.fajr_fatir, extraCards.fajr_afiya, extraCards.fajr_mani, extraCards.fajr_tahlil, extraCards.ajirni7, extraCards.fajr_isa, extraCards.ecirna, extraCards.tarjuman],
-    dhuhr: [extraCards.d_ibrahim, extraCards.d_nuh, extraCards.d_ikhwan, extraCards.d_zakariya, extraCards.d_fath, extraCards.isim_azam],
-    asr: [extraCards.e_ayyub, extraCards.e_musa, extraCards.e_pain, extraCards.e_knowledge, extraCards.e_naba, extraCards.tarjuman],
+    fajr: [muadhCard, extraCards.fajr_mulk, extraCards.fajr_fatir, extraCards.fajr_afiya, extraCards.fajr_mani, extraCards.fajr_tahlil, extraCards.ajirni7, extraCards.fajr_isa, extraCards.ecirna, extraCards.tarjuman],
+    dhuhr: [muadhCard, extraCards.d_ibrahim, extraCards.d_nuh, extraCards.d_ikhwan, extraCards.d_zakariya, extraCards.d_fath, extraCards.isim_azam],
+    asr: [muadhCard, extraCards.e_ayyub, extraCards.e_musa, extraCards.e_pain, extraCards.e_knowledge, extraCards.e_naba, extraCards.tarjuman],
     maghrib: [extraCards.a_shukr, hashrEvening, extraCards.ajirni7, extraCards.ecirna, extraCards.isim_azam],
-    isha: [extraCards.i_yusuf, extraCards.i_sabr, extraCards.i_abrar, extraCards.i_rahma, extraCards.i_malik, extraCards.isim_azam],
+    isha: [muadhCard, extraCards.i_yusuf, extraCards.i_sabr, extraCards.i_abrar, extraCards.i_rahma, extraCards.i_malik, extraCards.isim_azam],
     tahajjud: [extraCards.h_sabr, extraCards.h_israf, extraCards.h_shaytan, extraCards.h_munjiya, extraCards.h_salawat, extraCards.h_vitr, extraCards.h_subhana],
 };
 
