@@ -4,6 +4,8 @@
 ============================================================ */
 let currentTabIndex = 0;
 let unreadOnly = false;          // hide cards already read today
+const AR_SCALES = [1, 1.15, 1.3, 0.88];   // Arabic text sizes the "Aa" button cycles through
+let arScale = 1;
 const STORE_KEY = 'dua-state-v1';
 const wheelsState = {};
 
@@ -14,7 +16,7 @@ function saveState() {
     try {
         const idx = {};
         tabsOrder.forEach(id => { if (wheelsState[id]) idx[id] = wheelsState[id].currentIndex; });
-        localStorage.setItem(STORE_KEY, JSON.stringify({ tab: tabsOrder[currentTabIndex], idx, unreadOnly, date: todayStr() }));
+        localStorage.setItem(STORE_KEY, JSON.stringify({ tab: tabsOrder[currentTabIndex], idx, unreadOnly, arScale, date: todayStr() }));
     } catch (e) { /* storage unavailable: app works without it */ }
 }
 
@@ -291,10 +293,18 @@ async function keepAwake() {
     } catch (e) { /* not allowed right now: ignore */ }
 }
 
+function applyArScale() {
+    document.documentElement.style.setProperty('--ar', arScale);
+    const btn = document.getElementById('btnSize');
+    if (btn) btn.classList.toggle('on', arScale !== 1);
+}
+
 function initAllWheels() {
     const saved = loadState();
     const sameDay = saved.date === todayStr();   // a new day starts from the first card
     unreadOnly = !!saved.unreadOnly;
+    if (AR_SCALES.includes(saved.arScale)) arScale = saved.arScale;
+    applyArScale();
     loadProgress();
     loadStreak();
     document.body.classList.add('no-anim');
@@ -333,6 +343,13 @@ function initAllWheels() {
         saveState();
     });
     syncFilterBtn();
+
+    document.getElementById('btnSize').addEventListener('click', () => {
+        arScale = AR_SCALES[(AR_SCALES.indexOf(arScale) + 1) % AR_SCALES.length];
+        applyArScale();
+        updateWheel3D(tabsOrder[currentTabIndex]);   // text height changed: refresh the "more below" fade
+        saveState();
+    });
 
     document.querySelector('.nav-scroll').addEventListener('scroll', updateNavFade, { passive: true });
     document.getElementById('btnNext').addEventListener('click', goNext);
