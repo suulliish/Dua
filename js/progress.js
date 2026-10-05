@@ -84,7 +84,12 @@ function commit(card, wasDone) {
     refreshTabProgress(id);
     updateStreak();
     if (tabsOrder[currentTabIndex] === id) updateWheel3D(id);
-    if (card.classList.contains('done') && !wasDone) autoAdvance(card);
+    if (card.classList.contains('done') && !wasDone) {
+        const btn = card.querySelector('.act-main');
+        btn.classList.add('pulse');
+        setTimeout(() => btn.classList.remove('pulse'), 800);
+        autoAdvance(card);
+    }
 }
 
 // after the last tick of a card, slide to the next one by itself
